@@ -1,0 +1,9 @@
+This is a spike. There are many like it, but this one is mine.
+Had this been an acutal project, it would have tests, better documentation...
+
+This spike is to test:
+http://code.google.com/p/jquery-graceful-websocket/
+https://github.com/igrigorik/em-websocket
+https://github.com/ruby-amqp/amqp
+
+A disconnected websocket/AMQP chat client.

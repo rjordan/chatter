@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <title>Chat Test</title>
+    <script src="jquery-1.7.min.js"></script>
+    <script src="jquery.gracefulWebSocket.js"></script>
+    <script>
+      var ws = $.gracefulWebSocket("ws://127.0.0.1:8080/");
+  
+      // listen for messages from server using standard syntax
+      ws.onmessage = function(event) {
+         alert(event.data);   
+      };
+      
+      
+      ws.onerror = function(event) {
+        alert("Error: " + event.timeStamp );
+      };
+      
+      ws.send("Ping...");
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
