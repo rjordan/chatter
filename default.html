@@ -4,21 +4,30 @@
     <script src="jquery-1.7.min.js"></script>
     <script src="jquery.gracefulWebSocket.js"></script>
     <script>
+
+    $(function() {
       var ws = $.gracefulWebSocket("ws://127.0.0.1:8080/");
   
       // listen for messages from server using standard syntax
-      ws.onmessage = function(event) {
-         alert(event.data);   
+      ws.onmessage = function(event) {     
+         $("#messages").append("<p>"+event.data+"</p>");
       };
-      
       
       ws.onerror = function(event) {
         alert("Error: " + event.timeStamp );
       };
       
-      ws.send("Ping...");
+      $("#send").click(function() { ws.send( $("#msg").val() ); return false; } );
+    });
+      
     </script>
   </head>
   <body>
+        <form>
+          <input type="text" id="msg"></input>
+          <button id="send">Send</button>
+        </form>
+	<div id="messages">
+        </div>
   </body>
 </html>
