@@ -6,8 +6,8 @@
     <script>
 
     $(function() {
-      //var ws = new WebSocket("ws://127.0.0.1:8080/");
-      var ws = $.gracefulWebSocket("ws://127.0.0.1:8080/");
+      var ws = new WebSocket("ws://127.0.0.1:8080/");
+      //var ws = $.gracefulWebSocket("ws://127.0.0.1:8080/");
   
       // listen for messages from server using standard syntax
       ws.onmessage = function(event) {     
@@ -17,10 +17,6 @@
       ws.onerror = function(event) {
         $("#messages").append("<p>Error: "+event.timeStamp+"</p>");
       };
-
-      ws.onclose = function(event) {
-        alert("Socket closed!");
-      }
       
       $("#send").click(function() { ws.send( $("#msg").val() ); return false; } );
     });
