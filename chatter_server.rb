@@ -14,7 +14,7 @@ EventMachine.run do
   EventMachine::WebSocket.start(:host => "127.0.0.1", :port => 8080) do |ws|
     connection = AMQP.connect(:host => '127.0.0.1')
     channel  = AMQP::Channel.new(connection)
-    queue = channel.queue("spikes.chatter", :auto_delete => true)
+    queue = channel.queue("spikes.chatter.#{rand(10000)}", :auto_delete => true)
     exchange = channel.fanout("amq.fanout")
    
     queue.bind(exchange).subscribe do |payload|

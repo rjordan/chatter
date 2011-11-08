@@ -7,3 +7,9 @@ https://github.com/igrigorik/em-websocket
 https://github.com/ruby-amqp/amqp
 
 A disconnected websocket/AMQP chat client.
+
+Lesson learned: AMQP does fanouts to queues not clients. If a fanout
+appears to be working like direct and shuffling messages, its because
+two or more clients are sharing a queue. I used rand(10000) in this
+spike to fix the issue, in real use a unique key value would be more
+appropriate.
