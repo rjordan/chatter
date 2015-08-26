@@ -11,9 +11,9 @@ def run(app)
       end
     end
     
-    EventMachine::WebSocket.start(:host => "127.0.0.1", :port => 8080) do |ws|
+    EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 3001) do |ws|
       user_id = SecureRandom.uuid
-      connection = AMQP.connect(:host => '127.0.0.1')
+      connection = AMQP.connect(:host => ENV.fetch('RABBIT_HOST', '127.0.0.1'))
       channel  = AMQP::Channel.new(connection)
       queue = channel.queue("spikes.chatter.#{user_id}", :auto_delete => true)
       exchange = channel.fanout("amq.fanout")

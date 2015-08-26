@@ -1,8 +1,11 @@
 FROM railsbase:latest
 
+ENV RABBIT_HOST rabbitmq
+EXPOSE 3000
+EXPOSE 3001
+
 ADD . /app
 WORKDIR /app
 RUN bundle install --without development test
-RUN bundle exec rake tmp:create;\
-    bundle exec rake assets:precompile
+
 

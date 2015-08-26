@@ -4,9 +4,9 @@
     <script src="jquery-1.7.min.js"></script>
     <script src="jquery.gracefulWebSocket.js"></script>
     <script>
-
-    $(function() {
-      var ws = new WebSocket("ws://127.0.0.1:8080/");
+  
+    function setupWebSocket(host) {
+      var ws = new WebSocket(host);
       //var ws = $.gracefulWebSocket("ws://127.0.0.1:8080/");
   
       // listen for messages from server using standard syntax
@@ -19,6 +19,10 @@
       };
       
       $("#send").click(function() { ws.send( $("#msg").val() ); return false; } );
+    }
+   
+    $(function() {
+      setupWebSocket("ws://127.0.0.1:3001/");
     });
       
     </script>
