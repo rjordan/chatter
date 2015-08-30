@@ -2,6 +2,9 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
 
+RABBIT_HOST=ENV.fetch('RABBIT_HOST', '127.0.0.1')
+WS_HOST=ENV.fetch('WS_HOST', '127.0.0.1:3001')
+
 def run(app)
   EventMachine.run do
   
@@ -13,7 +16,7 @@ def run(app)
     
     EventMachine::WebSocket.start(:host => '0.0.0.0', :port => 3001) do |ws|
       user_id = SecureRandom.uuid
-      connection = AMQP.connect(:host => ENV.fetch('RABBIT_HOST', '127.0.0.1'))
+      connection = AMQP.connect(:host =>RABBIT_HOST)
       channel  = AMQP::Channel.new(connection)
       queue = channel.queue("spikes.chatter.#{user_id}", :auto_delete => true)
       exchange = channel.fanout("amq.fanout")
